@@ -1,7 +1,7 @@
 django-yandex-money
 ===================
 
-`Документация <https://money.yandex.ru/doc.xml?id=526025>`_ для по интеграции
+`Документация <https://money.yandex.ru/doc.xml?id=526537>`_ для по интеграции
 
 Установка
 ---------
