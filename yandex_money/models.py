@@ -28,13 +28,15 @@ class Payment(models.Model):
         GP = 'gp'
         MC = 'mc'
         WM = 'wm'
+        SB = 'sb'
 
         CHOICES = (
             (PC, 'Яндекс.Деньги'),
             (AC, 'Банковская карта'),
             (GP, 'По коду через терминал'),
             (MC, 'со счета мобильного телефона'),
-            (WM, 'WebMoney')
+            (WM, 'WebMoney'),
+            (SB, 'Выставление в Сбербанк.Онлайн')
         )
 
     class CURRENCY:
