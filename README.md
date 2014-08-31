@@ -1,0 +1,2 @@
+yandexmoney_django
+==================
