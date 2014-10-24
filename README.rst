@@ -163,3 +163,5 @@ django-yandex-money
                 },
             }
         }
+
+Взято из https://github.com/DrMartiner/django-yandex-money
