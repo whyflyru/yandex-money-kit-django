@@ -2,6 +2,7 @@
 
 import os
 from distutils.core import setup
+from setuptools import find_packages
 
 __author__ = 'aTastyCookie'
 __version__ = '1'
@@ -11,7 +12,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='django-yandex-money',
     version=__version__,
-    packages=['yandex_money'],
+    packages=find_packages(),
     url='https://github.com/aTastyCookie/yandexmoney_django',
     license='MIT',
     author=__author__,
