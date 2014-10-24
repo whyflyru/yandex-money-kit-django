@@ -1,7 +1,7 @@
 django-yandex-money
 ===================
 
-`Документация <https://money.yandex.ru/doc.xml?id=526537>`_ для по интеграции
+`Документация <https://money.yandex.ru/doc.xml?id=526537>`_ по интеграции
 
 Установка
 ---------
@@ -10,7 +10,7 @@ django-yandex-money
 
     .. code:: sh
 
-        pip install django-yandex-money
+        pip install git+https://github.com/aTastyCookie/yandexmoney_django.git
 
 #.  Добавить ``yandex_money`` в ``settings.INSTALLED_APPS``:
 
@@ -40,7 +40,7 @@ django-yandex-money
             url(r'^yandex-money/', include('yandex_money.urls')),
         )
 
-#. Указать в settings следующие параметры:
+#. Указать в settings.py следующие параметры:
 
     .. code:: python
 
@@ -52,7 +52,7 @@ django-yandex-money
         YANDEX_MONEY_SUCCESS_URL = 'https://example.com/success-payment/'
 
 
-#. Указать в рабочем Яндекс-денег кабинете натсрйоки для приема уведомлений:
+#. Указать в кабинете Яндекс.Деньги настройки для приема уведомлений:
 
 * paymentAvisoURL: https://example.com/yandex-money/aviso/
 * checkURL: https://example.com/yandex-money/check/
@@ -104,7 +104,7 @@ django-yandex-money
                                 Сумма заказа: <b>{{ form.sum.value }}</b>
                             </li>
 
-                            {{ form.as_ul|safe }}
+                            {{ form.as_ul }}
 
                             <li style="margin-top: 20px;">
                                 <input type="submit" value="Оплатить">
