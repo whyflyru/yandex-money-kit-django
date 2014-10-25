@@ -5,9 +5,6 @@ from django.db import models
 from django.conf import settings
 from .signals import payment_process
 from .signals import payment_completed
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 class Payment(models.Model):
@@ -50,7 +47,7 @@ class Payment(models.Model):
             (TEST, 'Тестовая валюта'),
         )
 
-    user = models.ForeignKey(User, blank=True, null=True,
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True,
                              verbose_name='Пользователь')
     custome_number = models.CharField('Номер заказа',
                                       unique=True, max_length=64,

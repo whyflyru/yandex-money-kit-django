@@ -8,13 +8,11 @@ from .forms import NoticeForm
 from datetime import datetime
 from django.http import HttpResponse
 from django.views.generic import View
-from django.contrib.auth import get_user_model
 from annoying.functions import get_object_or_None
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from .models import Payment
 
-User = get_user_model()
 logger = logging.getLogger('yandex_money')
 
 
