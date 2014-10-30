@@ -53,6 +53,7 @@ class BasePaymentForm(forms.Form):
 
     shopId = forms.IntegerField(initial=settings.YANDEX_MONEY_SHOP_ID)
     scid = forms.IntegerField(initial=settings.YANDEX_MONEY_SCID)
+    orderNumber = forms.CharField(min_length=1, max_length=64)
     customerNumber = forms.CharField(min_length=1, max_length=64)
     paymentType = forms.CharField(label='Способ оплаты',
                                   widget=forms.Select(choices=Payment.PAYMENT_TYPE.CHOICES),
@@ -133,6 +134,7 @@ class PaymentForm(BasePaymentForm):
             self.fields['sum'].initial = instance.order_amount
             self.fields['paymentType'].initial = instance.payment_type
             self.fields['customerNumber'].initial = instance.customer_number
+            self.fields['orderNumber'].initial = instance.order_number
 
     def get_display_field_names(self):
         return ['paymentType', 'cps_email', 'cps_phone']
