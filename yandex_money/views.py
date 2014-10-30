@@ -110,7 +110,7 @@ class CheckOrderFormView(BaseView):
         if payment.order_amount != data['orderSumAmount']:
             params = {
                 'code': '100',
-                'message': 'Неверно указана сумма платежа',
+                'message': u'Неверно указана сумма платежа',
             }
             raise YandexValidationError(params=params)
 
