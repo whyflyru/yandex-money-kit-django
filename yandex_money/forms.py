@@ -63,6 +63,14 @@ class BasePaymentForm(forms.Form):
     md5 = forms.CharField(min_length=32, max_length=32)
     action = forms.CharField(max_length=16)
 
+    def __init__(self, *args, **kwargs):
+        super(BasePaymentForm, self).__init__(*args, **kwargs)
+        if hasattr(settings, 'YANDEX_ALLOWED_PAYMENT_TYPES'):
+            allowed_payment_types = settings.YANDEX_ALLOWED_PAYMENT_TYPES
+            self.fields['paymentType'].widget.choices = filter(
+                lambda x: x[0] in allowed_payment_types,
+                self.fields['paymentType'].widget.choices)
+
     @staticmethod
     def make_md5(cd):
         """
@@ -99,9 +107,6 @@ class BasePaymentForm(forms.Form):
 
 
 class PaymentForm(BasePaymentForm):
-    def get_display_field_names(self):
-        return ['paymentType', 'cps_email', 'cps_phone']
-
     sum = forms.FloatField(label='Сумма заказа')
 
     cps_email = forms.EmailField(label='Email', required=False)
@@ -127,7 +132,10 @@ class PaymentForm(BasePaymentForm):
         if instance:
             self.fields['sum'].initial = instance.order_amount
             self.fields['paymentType'].initial = instance.payment_type
-            self.fields['customerNumber'].initial = instance.custome_number
+            self.fields['customerNumber'].initial = instance.customer_number
+
+    def get_display_field_names(self):
+        return ['paymentType', 'cps_email', 'cps_phone']
 
 
 class CheckForm(BasePaymentForm):
