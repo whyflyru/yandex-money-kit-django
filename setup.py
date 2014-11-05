@@ -5,7 +5,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 __author__ = 'aTastyCookie'
-__version__ = '1'
+__version__ = '1.1'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
@@ -33,10 +33,9 @@ setup(
     ],
     install_requires=[
         'Django>1.5',
-        'South==0.8.4',
+        'South>=1.0',
         'lxml==3.3.4',
         'django-webtest==1.7.7',
         'webtest==2.0.15',
-        'django-annoying',
     ],
 )
