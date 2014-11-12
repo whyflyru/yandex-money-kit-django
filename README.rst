@@ -98,7 +98,7 @@ django-yandex-money
             </head>
             <body>
                 <div style="border: 1px dotted gray; padding: 15px 15px 0; margin: 30px auto; width: 300px;">
-                    <form name="ShopForm" method="POST" action="https://yandex.ru/eshop.xml">
+                    <form name="ShopForm" method="POST" action="https://money.yandex.ru/eshop.xml">
                         <ul style="list-style: none;">
                             <li style="margin-bottom: 20px;">
                                 Сумма заказа: <b>{{ form.sum.value }}</b>
