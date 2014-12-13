@@ -118,3 +118,5 @@ class Payment(models.Model):
         )
         verbose_name = 'Платёж'
         verbose_name_plural = 'Платежи'
+        app_label = 'yandex_money'
+        
