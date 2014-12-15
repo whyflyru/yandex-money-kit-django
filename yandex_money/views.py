@@ -12,7 +12,7 @@ from lxml.builder import E
 
 from .forms import CheckForm
 from .forms import NoticeForm
-from .models import Payment
+from .models import Payment, ResponseLog
 
 
 logger = logging.getLogger('yandex_money')
@@ -56,7 +56,11 @@ class BaseView(View):
             params = {'code': '200'}
 
         self.logging(request, params)
+        ResponseLog.objects.create(
+            post_data=unicode(request.POST),
+            code=int(params.get('code') or -1),
 
+        )
         content = self.get_xml(params)
         return HttpResponse(content, content_type='application/xml')
 

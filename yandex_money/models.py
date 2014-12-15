@@ -91,7 +91,7 @@ class Payment(models.Model):
         u'Номер транзакции оператора', blank=True, null=True)
     shop_amount = models.DecimalField(
         u'Сумма полученная на р/с', max_digits=15, decimal_places=2, blank=True,
-        null=True, help_text='За вычетом процента оператора')
+        null=True, help_text=u'За вычетом процента оператора')
     order_currency = models.PositiveIntegerField(
         u'Валюта', default=CURRENCY.RUB, choices=CURRENCY.CHOICES)
     shop_currency = models.PositiveIntegerField(
@@ -116,7 +116,21 @@ class Payment(models.Model):
         unique_together = (
             ('shop_id', 'order_number'),
         )
-        verbose_name = u'Платёж'
-        verbose_name_plural = u'Платежи'
+        verbose_name = u'платёж'
+        verbose_name_plural = u'платежи'
         app_label = 'yandex_money'
 
+
+class ResponseLog(models.Model):
+    pub_date = models.DateTimeField(u'Время создания', auto_now_add=True)
+    post_data = models.TextField(u'запрос', editable=False)
+    code = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return u'{}: {}...'.format(self.pub_date, self.post_data[:30])
+
+    class Meta:
+        ordering = ('-pub_date',)
+        verbose_name = u'ответ'
+        verbose_name_plural = u'ответы'
+        app_label = 'yandex_money'
