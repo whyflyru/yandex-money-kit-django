@@ -47,15 +47,15 @@ class BasePaymentForm(forms.Form):
         CPAYMENT = 'paymentAviso'
 
         CHOICES = (
-            (CHECK, 'Проверка заказа'),
-            (CPAYMENT, 'Уведомления о переводе'),
+            (CHECK, u'Проверка заказа'),
+            (CPAYMENT, u'Уведомления о переводе'),
         )
 
     shopId = forms.IntegerField(initial=settings.YANDEX_MONEY_SHOP_ID)
     scid = forms.IntegerField(initial=settings.YANDEX_MONEY_SCID)
     orderNumber = forms.CharField(min_length=1, max_length=64)
     customerNumber = forms.CharField(min_length=1, max_length=64)
-    paymentType = forms.CharField(label='Способ оплаты',
+    paymentType = forms.CharField(label=u'Способ оплаты',
                                   widget=forms.Select(choices=Payment.PAYMENT_TYPE.CHOICES),
                                   min_length=2, max_length=2,
                                   initial=Payment.PAYMENT_TYPE.PC)
@@ -72,25 +72,25 @@ class BasePaymentForm(forms.Form):
                 lambda x: x[0] in allowed_payment_types,
                 self.fields['paymentType'].widget.choices)
 
-    @staticmethod
-    def make_md5(cd):
+    @classmethod
+    def make_md5(cls, cd):
         """
         action;orderSumAmount;orderSumCurrencyPaycash;orderSumBankPaycash;shopId;invoiceId;customerNumber;shopPassword
         """
-        params = [cd['action'],
-                  str(cd['orderSumAmount']),
-                  str(cd['orderSumCurrencyPaycash']),
-                  str(cd['orderSumBankPaycash']),
-                  str(cd['shopId']),
-                  str(cd['invoiceId']),
-                  cd['customerNumber'],
-                  settings.YANDEX_MONEY_SHOP_PASSWORD]
-        s = str(';'.join(params))
-        return md5(s).hexdigest().upper()
+        return md5(';'.join(map(str, (
+            cd['action'],
+            cd['orderSumAmount'],
+            cd['orderSumCurrencyPaycash'],
+            cd['orderSumBankPaycash'],
+            cd['shopId'],
+            cd['invoiceId'],
+            cd['customerNumber'],
+            settings.YANDEX_MONEY_SHOP_PASSWORD,
+        )))).hexdigest().upper()
 
-    @staticmethod
-    def check_md5(cd):
-        return BasePaymentForm.make_md5(cd) == cd['md5']
+    @classmethod
+    def check_md5(cls, cd):
+        return cls.make_md5(cd) == cd['md5']
 
     def clean_scid(self):
         scid = self.cleaned_data['scid']
