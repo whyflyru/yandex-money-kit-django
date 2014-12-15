@@ -111,6 +111,14 @@ class Payment(models.Model):
         if status == self.STATUS.SUCCESS:
             payment_completed.send(sender=self)
 
+    @classmethod
+    def get_used_shop_ids(cls):
+        return cls.objects.values_list('shop_id', flat=True).distinct()
+
+    @classmethod
+    def get_used_scids(cls):
+        return cls.objects.values_list('scid', flat=True).distinct()
+
     class Meta:
         ordering = ('-pub_date',)
         unique_together = (

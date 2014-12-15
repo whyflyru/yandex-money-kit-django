@@ -94,16 +94,20 @@ class BasePaymentForm(forms.Form):
 
     def clean_scid(self):
         scid = self.cleaned_data['scid']
-        if scid != settings.YANDEX_MONEY_SCID:
-            raise forms.ValidationError(
-                self.error_messages[self.ERROR_MESSAGE_CODES.BAD_SCID])
+        if (
+            scid != settings.YANDEX_MONEY_SCID and
+            not scid in Payment.get_used_scids()
+        ):
+            raise forms.ValidationError(self.error_messages[self.ERROR_MESSAGE_CODES.BAD_SCID])
         return scid
 
     def clean_shopId(self):
         shop_id = self.cleaned_data['shopId']
-        if shop_id != settings.YANDEX_MONEY_SHOP_ID:
-            raise forms.ValidationError(
-                self.error_messages[self.ERROR_MESSAGE_CODES.BAD_SHOP_ID])
+        if (
+            shop_id != settings.YANDEX_MONEY_SHOP_ID and
+            not shop_id in Payment.get_used_shop_ids()
+        ):
+            raise forms.ValidationError(self.error_messages[self.ERROR_MESSAGE_CODES.BAD_SHOP_ID])
         return shop_id
 
 
