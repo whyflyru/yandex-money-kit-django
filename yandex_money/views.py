@@ -14,6 +14,7 @@ from .forms import CheckForm
 from .forms import NoticeForm
 from .models import Payment
 
+
 logger = logging.getLogger('yandex_money')
 
 
