@@ -127,18 +127,3 @@ class Payment(models.Model):
         verbose_name = u'платёж'
         verbose_name_plural = u'платежи'
         app_label = 'yandex_money'
-
-
-class ResponseLog(models.Model):
-    pub_date = models.DateTimeField(u'Время создания', auto_now_add=True)
-    post_data = models.TextField(u'запрос', editable=False)
-    code = models.IntegerField(null=True)
-
-    def __unicode__(self):
-        return u'{}: {}...'.format(self.pub_date, self.post_data[:30])
-
-    class Meta:
-        ordering = ('-pub_date',)
-        verbose_name = u'ответ'
-        verbose_name_plural = u'ответы'
-        app_label = 'yandex_money'
