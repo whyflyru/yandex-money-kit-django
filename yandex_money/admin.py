@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from .models import Payment
+from .models import Payment, ResponseLog
 
 
 class PaymentAdmin(admin.ModelAdmin):
@@ -33,4 +33,23 @@ class PaymentAdmin(admin.ModelAdmin):
         'order_number',
     )
 
+    def has_add_permission(self, obj):
+        return False
+
+
+class ResponseLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'pub_date',
+        'post_data',
+        'code',
+    )
+    list_filter = (
+        'code',
+    )
+
+    def has_add_permission(self, obj):
+        return False
+
+
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(ResponseLog, ResponseLogAdmin)
