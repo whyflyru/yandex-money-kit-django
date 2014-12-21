@@ -50,6 +50,8 @@ django-yandex-money
         YANDEX_MONEY_SHOP_PASSWORD = 'password'
         YANDEX_MONEY_FAIL_URL = 'https://example.com/fail-payment/'
         YANDEX_MONEY_SUCCESS_URL = 'https://example.com/success-payment/'
+        # информировать о случаях, когда модуль вернул Яндекс.Кассе ошибку
+        YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR = True
 
 
 #. Указать в кабинете Яндекс.Деньги настройки для приема уведомлений:

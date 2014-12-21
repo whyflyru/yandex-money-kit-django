@@ -7,12 +7,14 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+from django.conf import settings
+from django.core.mail import mail_admins
 from lxml import etree
 from lxml.builder import E
 
 from .forms import CheckForm
 from .forms import NoticeForm
-from .models import Payment, ResponseLog
+from .models import Payment
 
 
 logger = logging.getLogger('yandex_money')
@@ -56,12 +58,17 @@ class BaseView(View):
             params = {'code': '200'}
 
         self.logging(request, params)
-        ResponseLog.objects.create(
-            post_data=unicode(request.POST),
-            code=int(params.get('code') or -1),
-
-        )
         content = self.get_xml(params)
+
+        if (
+            settings.get('YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
+            params.get('code') != '0'
+        ):
+            mail_admins('yandexmoney_django error', u'post data: {post_data}\n\nresponse:{response}'.format(
+                post_data=request.POST,
+                response=content,
+            ))
+
         return HttpResponse(content, content_type='application/xml')
 
     def validate(self, data, payment):
