@@ -61,7 +61,7 @@ class BaseView(View):
         content = self.get_xml(params)
 
         if (
-            settings.get('YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
+            getattr(settings, 'YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
             params.get('code') != '0'
         ):
             mail_admins('yandexmoney_django error', u'post data: {post_data}\n\nresponse:{response}'.format(
