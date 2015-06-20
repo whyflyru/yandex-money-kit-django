@@ -1,49 +1,48 @@
-django-yandex-money
-===================
+##yanexmoney-kit-django
 
-`Документация <https://money.yandex.ru/doc.xml?id=526537>`_ по интеграции
+Модуль оплаты yanexmoney-kit-django необходим для интеграции с сервисом [Яндекс.Касса](http://kassa.yandex.ru/) на базе фраймворка [Django](https://www.djangoproject.com).
 
-Установка
----------
+ Доступные платежные методы, если вы работаете как юридические лицо:
+* **Банковские карты** -  Visa (включая Electron), MasterCard и Maestro любого банка мира
+* **Электронные деньги** - Яндекс.Деньги и WebMoney
+* **Наличные** - [Более 170 тысяч пунктов](https://money.yandex.ru/pay/doc.xml?id=526209) оплаты по России
+* **Баланс телефона** - Билайн, МегаФон и МТС
+* **Интернет банкинг** - Альфа-Клик, Сбербанк Онлайн, Промсвязьбанк и MasterPass
 
+###Минимальные требования:
+* Django версии 1.5 или выше
+* South версии 1.0 или выше
+* lxml версии 3.3.4
+
+###Установка модуля
 #.  Установить пакет:
-
-    .. code:: sh
-
-        pip install git+https://github.com/aTastyCookie/yandexmoney_django.git
-
+```
+        pip install git+https://github.com/yandex-money/yandex-money-kit-django.git
+```
 #.  Добавить ``yandex_money`` в ``settings.INSTALLED_APPS``:
-
-    .. code:: python
-
+```
         INSTALLED_APPS = (
             ...
             'yandex_money',
             ...
         )
-
+```
 #. Выполнить синхронизацию с БД:
-
-    .. code:: sh
-
+```
         python manage.py syncdb
         python manage.py migrate # для тех, кто использует south
-
+```
 #. Добавить в ``urls.py``:
-
-    .. code:: python
-
+```
         urlpatterns = patterns('',
             # ...
             url(r'^fail-payment/$', TemplateView.as_view(template_name='fail.html'), name='payment_fail'),
             url(r'^success-payment/$', TemplateView.as_view(template_name='success.html'), name='payment_success'),
             url(r'^yandex-money/', include('yandex_money.urls')),
         )
-
+```
 #. Указать в settings.py следующие параметры:
-
-    .. code:: python
-
+```
         YANDEX_MONEY_DEBUG = False
         YANDEX_MONEY_SCID = 12345
         YANDEX_MONEY_SHOP_ID = 56789
@@ -52,27 +51,20 @@ django-yandex-money
         YANDEX_MONEY_SUCCESS_URL = 'https://example.com/success-payment/'
         # информировать о случаях, когда модуль вернул Яндекс.Кассе ошибку
         YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR = True
+```
+#. Указать в личном кабинете Яндекс.Деньги настройки для приема уведомлений:
+
+* paymentAvisoURL: `https://example.com/yandex-money/aviso/`
+* checkURL: `https://example.com/yandex-money/check/`
+* failURL: `https://example.com/fail-payment/`
+* successURL: `https://example.com/success-payment/`
 
 
-#. Указать в кабинете Яндекс.Деньги настройки для приема уведомлений:
-
-* paymentAvisoURL: https://example.com/yandex-money/aviso/
-* checkURL: https://example.com/yandex-money/check/
-* failURL: https://example.com/fail-payment/
-* successURL: https://example.com/success-payment/
-
-
-Использование
--------------
-
-`Полный пример использования <https://github.com/DrMartiner/django-yandex-money/tree/develop/example>`_
+###Использование
+[Полный пример использования](<https://github.com/DrMartiner/django-yandex-money/tree/develop/example>)
 
 #. Представление платежной формы:
-
-    .. code:: python
-
-        # -*- coding: utf-8 -*-
-
+```
         from django.views.generic import TemplateView
         from yandex_money.forms import PaymentForm
         from yandex_money.models import Payment
@@ -88,11 +80,9 @@ django-yandex-money
                 ctx = super(OrderPage, self).get_context_data(**kwargs)
                 ctx['form'] = PaymentForm(instance=payment)
                 return ctx
-
+```
 #. Шаблон платежной формы:
-
-    .. code:: html
-
+```
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -116,11 +106,9 @@ django-yandex-money
                 </div>
             </body>
         </html>
-
+```
 #. Также вы можете определить logger 'yandex_money':
-
-    .. code:: python
-
+```
         LOGGING = {
             'version': 1,
             'disable_existing_loggers': True,
@@ -165,5 +153,16 @@ django-yandex-money
                 },
             }
         }
+```
+###Лицензионный договор.
 
-Tnx to `@DrMartiner <https://github.com/DrMartiner>`_ & `@sdfsdhgjkbmnmxc <https://github.com/sdfsdhgjkbmnmxc>`_
+Любое использование Вами программы означает полное и безоговорочное принятие Вами условий лицензионного договора, размещенного по адресу https://money.yandex.ru/doc.xml?id=527132 (далее – «Лицензионный договор»). 
+Если Вы не принимаете условия Лицензионного договора в полном объёме, Вы не имеете права использовать программу в каких-либо целях.
+
+###Нашли ошибку или у вас есть предложение по улучшению модуля?
+Пишите нам cms@yamoney.ru
+При обращении необходимо:
+* Указать наименование CMS и компонента магазина, а также их версии
+* Указать версию платежного модуля (доступна в списке меню `Модули`)
+* Описать проблему или предложение
+* Приложить снимок экрана (для большей информативности)
