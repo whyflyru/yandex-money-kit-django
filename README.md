@@ -15,11 +15,11 @@
 * lxml версии 3.3.4
 
 ###Установка модуля
-#.  Установить пакет:
+* Установить пакет:
 ```
         pip install git+https://github.com/yandex-money/yandex-money-kit-django.git
 ```
-#.  Добавить ``yandex_money`` в ``settings.INSTALLED_APPS``:
+* Добавить ``yandex_money`` в ``settings.INSTALLED_APPS``:
 ```
         INSTALLED_APPS = (
             ...
@@ -27,12 +27,12 @@
             ...
         )
 ```
-#. Выполнить синхронизацию с БД:
+* Выполнить синхронизацию с БД:
 ```
         python manage.py syncdb
         python manage.py migrate # для тех, кто использует south
 ```
-#. Добавить в ``urls.py``:
+* Добавить в ``urls.py``:
 ```
         urlpatterns = patterns('',
             # ...
@@ -41,7 +41,7 @@
             url(r'^yandex-money/', include('yandex_money.urls')),
         )
 ```
-#. Указать в settings.py следующие параметры:
+* Указать в settings.py следующие параметры:
 ```
         YANDEX_MONEY_DEBUG = False
         YANDEX_MONEY_SCID = 12345
@@ -52,7 +52,7 @@
         # информировать о случаях, когда модуль вернул Яндекс.Кассе ошибку
         YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR = True
 ```
-#. Указать в личном кабинете Яндекс.Деньги настройки для приема уведомлений:
+* Указать в личном кабинете Яндекс.Деньги настройки для приема уведомлений:
 
 * paymentAvisoURL: `https://example.com/yandex-money/aviso/`
 * checkURL: `https://example.com/yandex-money/check/`
@@ -63,7 +63,7 @@
 ###Использование
 [Полный пример использования](<https://github.com/DrMartiner/django-yandex-money/tree/develop/example>)
 
-#. Представление платежной формы:
+* Представление платежной формы:
 ```
         from django.views.generic import TemplateView
         from yandex_money.forms import PaymentForm
@@ -81,7 +81,7 @@
                 ctx['form'] = PaymentForm(instance=payment)
                 return ctx
 ```
-#. Шаблон платежной формы:
+* Шаблон платежной формы:
 ```
         <html>
             <head>
@@ -107,7 +107,7 @@
             </body>
         </html>
 ```
-#. Также вы можете определить logger 'yandex_money':
+* Также вы можете определить logger 'yandex_money':
 ```
         LOGGING = {
             'version': 1,
