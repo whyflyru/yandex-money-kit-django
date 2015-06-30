@@ -5,12 +5,12 @@ from distutils.core import setup
 from setuptools import find_packages
 
 __author__ = 'Yandex.Money'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-yandex-money',
+    name='django_yandex_money',
     version=__version__,
     packages=find_packages(),
     url='https://github.com/yandex-money/yandex-money-kit-django',
