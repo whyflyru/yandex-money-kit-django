@@ -5,7 +5,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 __author__ = 'Yandex.Money'
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
