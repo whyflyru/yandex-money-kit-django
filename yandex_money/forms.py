@@ -13,18 +13,18 @@ class BasePaymentForm(forms.Form):
         sum                         amount
         customerNumber              user
         orderNumber                 id
-        shopSuccessURL	            success_url
-        shopFailURL	                fail_url
+        shopSuccessURL              success_url
+        shopFailURL                 fail_url
         cps_provider                payment_type
         cps_email                   cps_email
         cps_phone                   cps_phone
-        paymentType	                payment_type
+        paymentType                 payment_type
         shopId                      shop_id
         invoiceId                   invoice_id
-        orderCreatedDatetime	    <no use>
-        orderSumAmount	            order_amount
-        orderSumCurrencyPaycash	    order_currency
-        orderSumBankPaycash	        <no use>
+        orderCreatedDatetime        <no use>
+        orderSumAmount              order_amount
+        orderSumCurrencyPaycash     order_currency
+        orderSumBankPaycash         <no use>
         shopSumAmount               shop_amount
         shopSumCurrencyPaycash      shop_currency
         shopSumBankPaycash          <no use>
