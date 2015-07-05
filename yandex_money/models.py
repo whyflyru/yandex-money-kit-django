@@ -29,8 +29,9 @@ class Payment(models.Model):
         WM = 'wm'
         SB = 'sb'
         AB = 'ab'
-		  MA = 'ma'
-		  PB = 'pb'
+        MA = 'ma'
+        PB = 'pb'
+
         CHOICES = (
             (PC, u'Кошелек Яндекс.Деньги'),
             (AC, u'Банковская карта'),
@@ -39,8 +40,8 @@ class Payment(models.Model):
             (WM, u'Кошелек WebMoney'),
             (SB, u'Сбербанк: оплата по SMS или Сбербанк Онлайн'),
             (AB, u'Альфа-Клик'),
-				(MA, u'MasterPass'),
-				(PB, u'Интернет-банк Промсвязьбанка'),
+            (MA, u'MasterPass'),
+            (PB, u'Интернет-банк Промсвязьбанка'),
         )
 
     class CURRENCY:
