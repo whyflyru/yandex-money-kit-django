@@ -143,6 +143,10 @@ class PaymentForm(BasePaymentForm):
                 self.fields['shopFailURL'].initial = instance.fail_url
             if instance.success_url:
                 self.fields['shopSuccessURL'].initial = instance.success_url
+            if instance.cps_email:
+                self.fields['cps_email'].initial = instance.cps_email
+            if instance.cps_phone:
+                self.fields['cps_phone'].initial = instance.cps_phone
 
     def get_display_field_names(self):
         return ['paymentType', 'cps_email', 'cps_phone']
