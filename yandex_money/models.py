@@ -131,3 +131,7 @@ class Payment(models.Model):
         verbose_name = u'платёж'
         verbose_name_plural = u'платежи'
         app_label = 'yandex_money'
+
+    def __unicode__(self):
+        return u'[Payment id={}, order_number={}, payment_type={}, status={}]'.format(
+            self.id, self.order_number, self.payment_type, self.status)
