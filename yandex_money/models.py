@@ -22,15 +22,15 @@ class Payment(models.Model):
         )
 
     class PAYMENT_TYPE:
-        PC = 'pc'
-        AC = 'ac'
-        GP = 'gp'
-        MC = 'mc'
-        WM = 'wm'
-        SB = 'sb'
-        AB = 'ab'
-        MA = 'ma'
-        PB = 'pb'
+        PC = 'PC'
+        AC = 'AC'
+        GP = 'GP'
+        MC = 'MC'
+        WM = 'WM'
+        SB = 'SB'
+        AB = 'AB'
+        MA = 'MA'
+        PB = 'PB'
 
         CHOICES = (
             (PC, u'Кошелек Яндекс.Деньги'),
