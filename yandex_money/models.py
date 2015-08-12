@@ -22,15 +22,16 @@ class Payment(models.Model):
         )
 
     class PAYMENT_TYPE:
-        PC = 'pc'
-        AC = 'ac'
-        GP = 'gp'
-        MC = 'mc'
-        WM = 'wm'
-        SB = 'sb'
-        AB = 'ab'
-		  MA = 'ma'
-		  PB = 'pb'
+        PC = 'PC'
+        AC = 'AC'
+        GP = 'GP'
+        MC = 'MC'
+        WM = 'WM'
+        SB = 'SB'
+        AB = 'AB'
+        MA = 'MA'
+        PB = 'PB'
+
         CHOICES = (
             (PC, u'Кошелек Яндекс.Деньги'),
             (AC, u'Банковская карта'),
@@ -39,8 +40,8 @@ class Payment(models.Model):
             (WM, u'Кошелек WebMoney'),
             (SB, u'Сбербанк: оплата по SMS или Сбербанк Онлайн'),
             (AB, u'Альфа-Клик'),
-				(MA, u'MasterPass'),
-				(PB, u'Интернет-банк Промсвязьбанка'),
+            (MA, u'MasterPass'),
+            (PB, u'Интернет-банк Промсвязьбанка'),
         )
 
     class CURRENCY:
@@ -130,3 +131,7 @@ class Payment(models.Model):
         verbose_name = u'платёж'
         verbose_name_plural = u'платежи'
         app_label = 'yandex_money'
+
+    def __unicode__(self):
+        return u'[Payment id={}, order_number={}, payment_type={}, status={}]'.format(
+            self.id, self.order_number, self.payment_type, self.status)
