@@ -31,7 +31,9 @@ class Payment(models.Model):
         AB = 'AB'
         MA = 'MA'
         PB = 'PB'
-
+		  QW = 'QW'
+		  QP = 'QP'
+		  
         CHOICES = (
             (PC, u'Кошелек Яндекс.Деньги'),
             (AC, u'Банковская карта'),
@@ -42,6 +44,8 @@ class Payment(models.Model):
             (AB, u'Альфа-Клик'),
             (MA, u'MasterPass'),
             (PB, u'Интернет-банк Промсвязьбанка'),
+            (QW, u'QIWI Wallet'),
+            (QP, u'Доверительный платеж (Куппи.ру)'),
         )
 
     class CURRENCY:
