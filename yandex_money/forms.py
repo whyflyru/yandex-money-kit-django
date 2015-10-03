@@ -13,18 +13,18 @@ class BasePaymentForm(forms.Form):
         sum                         amount
         customerNumber              user
         orderNumber                 id
-        shopSuccessURL	            success_url
-        shopFailURL	                fail_url
+        shopSuccessURL              success_url
+        shopFailURL                 fail_url
         cps_provider                payment_type
         cps_email                   cps_email
         cps_phone                   cps_phone
-        paymentType	                payment_type
+        paymentType                 payment_type
         shopId                      shop_id
         invoiceId                   invoice_id
-        orderCreatedDatetime	    <no use>
-        orderSumAmount	            order_amount
-        orderSumCurrencyPaycash	    order_currency
-        orderSumBankPaycash	        <no use>
+        orderCreatedDatetime        <no use>
+        orderSumAmount              order_amount
+        orderSumCurrencyPaycash     order_currency
+        orderSumBankPaycash         <no use>
         shopSumAmount               shop_amount
         shopSumCurrencyPaycash      shop_currency
         shopSumBankPaycash          <no use>
@@ -139,6 +139,14 @@ class PaymentForm(BasePaymentForm):
             self.fields['paymentType'].initial = instance.payment_type
             self.fields['customerNumber'].initial = instance.customer_number
             self.fields['orderNumber'].initial = instance.order_number
+            if instance.fail_url:
+                self.fields['shopFailURL'].initial = instance.fail_url
+            if instance.success_url:
+                self.fields['shopSuccessURL'].initial = instance.success_url
+            if instance.cps_email:
+                self.fields['cps_email'].initial = instance.cps_email
+            if instance.cps_phone:
+                self.fields['cps_phone'].initial = instance.cps_phone
 
     def get_display_field_names(self):
         return ['paymentType', 'cps_email', 'cps_phone']

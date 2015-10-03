@@ -5,7 +5,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 __author__ = 'Yandex.Money'
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
@@ -16,7 +16,7 @@ setup(
     url='https://github.com/yandex-money/yandex-money-kit-django',
     license='MIT',
     author=__author__,
-    author_email='cms@Gyamoney.ru',
+    author_email='cms@yamoney.ru',
     keywords=['django', 'yandex', 'money', 'payment', 'pay'],
     description='Integrating django project with yandex-money',
     classifiers=[
@@ -32,8 +32,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=[
-        #'Django>1.5',
-        'South>=1.0',
+        # 'Django>1.5',
         'lxml>=3.3.4',
         'django-webtest==1.7.7',
         'webtest==2.0.15',
