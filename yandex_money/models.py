@@ -31,9 +31,9 @@ class Payment(models.Model):
         AB = 'AB'
         MA = 'MA'
         PB = 'PB'
-		  QW = 'QW'
-		  QP = 'QP'
-		  
+        QW = 'QW'
+        QP = 'QP'
+
         CHOICES = (
             (PC, u'Кошелек Яндекс.Деньги'),
             (AC, u'Банковская карта'),
