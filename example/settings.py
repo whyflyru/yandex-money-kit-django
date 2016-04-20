@@ -55,7 +55,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'app',
-    'south',
     'yandex_money',
 )
 
