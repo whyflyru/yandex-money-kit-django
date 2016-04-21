@@ -6,4 +6,5 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    url(r'^yandex-money/', include('yandex_money.urls')),
 ]
