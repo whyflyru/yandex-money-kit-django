@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from hashlib import md5
 
 from django.test import TestCase
 from django.test.utils import override_settings
@@ -15,6 +16,33 @@ from yandex_money.forms import PaymentForm, BasePaymentForm
 
 ACTION_CHECK = 'checkOrder'
 ACTION_NOTICE = 'paymentAviso'
+
+
+class TestBasePaymentForm(TestCase):
+    def setUp(self):
+        self.form_class = BasePaymentForm()
+
+    def test_md5(self):
+        cd = {
+            'action': ACTION_CHECK,
+            'orderSumAmount': '100',
+            'orderSumCurrencyPaycash': '100',
+            'orderSumBankPaycash': '123',
+            'shopId': settings.YANDEX_MONEY_SHOP_ID,
+            'invoiceId': '1',
+            'customerNumber': '1'
+        }
+        md5string = md5(';'.join(map(str, (
+            cd['action'],
+            cd['orderSumAmount'],
+            cd['orderSumCurrencyPaycash'],
+            cd['orderSumBankPaycash'],
+            cd['shopId'],
+            cd['invoiceId'],
+            cd['customerNumber'],
+            settings.YANDEX_MONEY_SHOP_PASSWORD,
+        )))).hexdigest().upper()
+        self.assertEqual(md5string, self.form_class.make_md5(cd))
 
 
 class BaseTest(TestCase):
