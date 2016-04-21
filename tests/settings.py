@@ -6,15 +6,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.auth',
 
-    'yandex_money',
-    'tests'
+    'app',
+    'yandex_money'
 ]
 
-ROOT_URLCONF = 'tests.urls'
+ROOT_URLCONF = 'tests.app.urls'
 
 MIDDLEWARE_CLASSES = []
 

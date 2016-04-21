@@ -15,7 +15,7 @@ def runtests():
     application = get_wsgi_application()
 
     from django.core.management import call_command
-    result = call_command('test')
+    result = call_command('test', 'app')
     sys.exit(result)
 
 
