@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from hashlib import md5
+import xml.etree.ElementTree as ET
 
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 from django import forms
 from django.conf import settings
-import xml.etree.ElementTree as ET
 
-from models import Product, Order
+from .models import Product, Order
 from yandex_money.models import Payment
 from yandex_money.forms import PaymentForm, BasePaymentForm
 
@@ -32,7 +32,8 @@ class TestBasePaymentForm(TestCase):
             'invoiceId': '1',
             'customerNumber': '1'
         }
-        md5string = md5(';'.join(map(str, (
+
+        hash_string = ';'.join(map(str, (
             cd['action'],
             cd['orderSumAmount'],
             cd['orderSumCurrencyPaycash'],
@@ -40,8 +41,10 @@ class TestBasePaymentForm(TestCase):
             cd['shopId'],
             cd['invoiceId'],
             cd['customerNumber'],
-            settings.YANDEX_MONEY_SHOP_PASSWORD,
-        )))).hexdigest().upper()
+            settings.YANDEX_MONEY_SHOP_PASSWORD
+        )))
+        hash_string = hash_string.encode('utf-8')
+        md5string = md5(hash_string).hexdigest().upper()
         self.assertEqual(md5string, self.form_class.make_md5(cd))
 
 
