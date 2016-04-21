@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from random import randint
+
 from django.views.generic import TemplateView
 from models import Goods, Order
 from yandex_money.forms import PaymentForm

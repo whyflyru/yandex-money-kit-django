@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from hashlib import md5
+
 from django import forms
 from django.conf import settings
 from .models import Payment
