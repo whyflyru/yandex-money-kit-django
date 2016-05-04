@@ -4,8 +4,7 @@ python:
   - "3.4"
   - "3.5"
 env:
-  - DJANGO=1.8 DB=sqlite
-  - DJANGO=1.9 DB=sqlite
+  - DJANGO="django>=1.8,<1.10"
 install:
   - pip install -q Django==$DJANGO
   - pip install coveralls coverage django-discover-runner
