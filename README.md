@@ -1,5 +1,7 @@
 ##yanexmoney-kit-django
 
+[![Build](https://api.travis-ci.org/whyflyru/yandex-money-kit-django.svg?branch=master)](https://travis-ci.org/whyflyru/django-seo?branch=master) [![Coverage Status](https://coveralls.io/repos/github/whyflyru/yandex-money-kit-django/badge.svg?branch=master)](https://coveralls.io/github/whyflyru/yandex-money-kit-django?branch=master)
+
 Модуль оплаты yanexmoney-kit-django необходим для интеграции с сервисом [Яндекс.Касса](http://kassa.yandex.ru/) на базе фраймворка [Django](https://www.djangoproject.com).
 
  Доступные платежные методы, если вы работаете как юридические лицо:
