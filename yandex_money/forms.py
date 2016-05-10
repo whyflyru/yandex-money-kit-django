@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from hashlib import md5
+
 from django import forms
 from django.conf import settings
 from .models import Payment
@@ -77,7 +78,7 @@ class BasePaymentForm(forms.Form):
         """
         action;orderSumAmount;orderSumCurrencyPaycash;orderSumBankPaycash;shopId;invoiceId;customerNumber;shopPassword
         """
-        return md5(';'.join(map(str, (
+        hash_string = ';'.join(map(str, (
             cd['action'],
             cd['orderSumAmount'],
             cd['orderSumCurrencyPaycash'],
@@ -85,8 +86,10 @@ class BasePaymentForm(forms.Form):
             cd['shopId'],
             cd['invoiceId'],
             cd['customerNumber'],
-            settings.YANDEX_MONEY_SHOP_PASSWORD,
-        )))).hexdigest().upper()
+            settings.YANDEX_MONEY_SHOP_PASSWORD
+        )))
+        hash_string = hash_string.encode('utf-8')
+        return md5(hash_string).hexdigest().upper()
 
     @classmethod
     def check_md5(cls, cd):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 import sys
 import os.path
 
@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, '..'))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
@@ -55,7 +55,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'app',
-    'south',
     'yandex_money',
 )
 

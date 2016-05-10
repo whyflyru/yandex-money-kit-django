@@ -5,7 +5,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 __author__ = 'Yandex.Money'
-__version__ = '1.1.7'
+__version__ = '1.2.0'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
@@ -32,9 +32,11 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=[
-        # 'Django>1.5',
+        'Django>=1.8',
         'lxml>=3.3.4',
         'django-webtest==1.7.7',
         'webtest==2.0.15',
     ],
+    test_suite='tests.runtests.runtests',
+    test_requires=['coveralls', 'coverage', 'django-discover-runner']
 )

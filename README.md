@@ -1,5 +1,7 @@
 ##yanexmoney-kit-django
 
+[![Build](https://api.travis-ci.org/whyflyru/yandex-money-kit-django.svg?branch=master)](https://travis-ci.org/whyflyru/django-seo?branch=master) [![Coverage Status](https://coveralls.io/repos/github/whyflyru/yandex-money-kit-django/badge.svg?branch=master)](https://coveralls.io/github/whyflyru/yandex-money-kit-django?branch=master)
+
 Модуль оплаты yanexmoney-kit-django необходим для интеграции с сервисом [Яндекс.Касса](http://kassa.yandex.ru/) на базе фраймворка [Django](https://www.djangoproject.com).
 
  Доступные платежные методы, если вы работаете как юридические лицо:
@@ -11,8 +13,8 @@
 * **Кредитование** - Доверительный платеж (Куппи.ру)
 
 ###Минимальные требования:
-* Django версии 1.5 или выше
-* South версии 1.0 или выше
+* Python 2.7 или Python 3.4 и выше
+* Django версии 1.8 или выше
 * lxml версии 3.3.4
 
 ###Установка модуля
@@ -155,6 +157,13 @@
             }
         }
 ```
+
+###Запуск тестов
+Для запуска тестов выполните:
+```
+$ python setup.py test
+```
+
 ###Лицензионный договор.
 
 Любое использование Вами программы означает полное и безоговорочное принятие Вами условий лицензионного договора, размещенного по адресу https://money.yandex.ru/doc.xml?id=527132 (далее – «Лицензионный договор»). 
