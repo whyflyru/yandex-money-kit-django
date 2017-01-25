@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from django.conf import settings
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 from .signals import payment_process
 from .signals import payment_completed
@@ -13,6 +14,7 @@ def get_random_string():
     return str(uuid4()).replace('-', '')
 
 
+@python_2_unicode_compatible
 class Payment(models.Model):
     class STATUS:
         PROCESSED = 'processed'
@@ -139,6 +141,6 @@ class Payment(models.Model):
         verbose_name_plural = u'платежи'
         app_label = 'yandex_money'
 
-    def __unicode__(self):
+    def __str__(self):
         return u'[Payment id={}, order_number={}, payment_type={}, status={}]'.format(
             self.id, self.order_number, self.payment_type, self.status)
