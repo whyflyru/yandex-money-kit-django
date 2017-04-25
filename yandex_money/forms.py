@@ -158,7 +158,7 @@ class CheckForm(BasePaymentForm):
     orderSumCurrencyPaycash = forms.IntegerField()
     shopSumAmount = forms.DecimalField(min_value=0, decimal_places=2)
     shopSumCurrencyPaycash = forms.IntegerField()
-    paymentPayerCode = forms.IntegerField(min_value=1)
+    paymentPayerCode = forms.IntegerField(min_value=1, required=False)
 
 
 class NoticeForm(BasePaymentForm):
@@ -167,6 +167,6 @@ class NoticeForm(BasePaymentForm):
     orderSumCurrencyPaycash = forms.IntegerField()
     shopSumAmount = forms.DecimalField(min_value=0, decimal_places=2)
     shopSumCurrencyPaycash = forms.IntegerField()
-    paymentPayerCode = forms.IntegerField(min_value=1)
+    paymentPayerCode = forms.IntegerField(min_value=1, required=False)
     cps_email = forms.EmailField(required=False)
     cps_phone = forms.CharField(max_length=15, required=False)
