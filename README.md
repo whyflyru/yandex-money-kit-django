@@ -123,7 +123,7 @@
                     'datefmt': '%d/%m/%Y %H:%M:%S',
                 },
             },
-            'handlers':
+            'handlers': {
                 'default': {
                     'level': 'DEBUG',
                     'class': 'logging.handlers.RotatingFileHandler',
