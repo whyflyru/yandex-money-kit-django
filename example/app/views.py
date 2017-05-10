@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from random import randint
+
 from django.views.generic import TemplateView
-from example.app.models import Goods, Order
+
 from yandex_money.forms import PaymentForm
 from yandex_money.models import Payment
+from .models import Goods, Order
 
 
 class OrderPage(TemplateView):
