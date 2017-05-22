@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
 import logging
 
 from django.http import HttpResponse
@@ -64,7 +65,7 @@ class BaseView(View):
             getattr(settings, 'YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
             params.get('code') != '0'
         ):
-            mail_admins('yandexmoney_django error', u'post data: {post_data}\n\nresponse:{response}'.format(
+            mail_admins('yandexmoney_django error', 'post data: {post_data}\n\nresponse:{response}'.format(
                 post_data=request.POST,
                 response=content,
             ))
@@ -122,7 +123,7 @@ class CheckOrderFormView(BaseView):
         if payment.order_amount != data['orderSumAmount']:
             params = {
                 'code': '100',
-                'message': u'Неверно указана сумма платежа',
+                'message': 'Неверно указана сумма платежа',
             }
             raise YandexValidationError(params=params)
 

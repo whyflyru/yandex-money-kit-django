@@ -37,5 +37,6 @@ setup(
     install_requires=[
         'Django>=1.4',
         'lxml>=2.3.4',
+        'six',
     ],
 )
