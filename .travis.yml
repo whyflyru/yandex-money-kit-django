@@ -6,6 +6,7 @@ python:
 env:
   - DJANGO=1.8.13 DB=sqlite
   - DJANGO=1.9.6 DB=sqlite
+  - DJANGO=1.10.7 DB=sqlite
 install:
   - pip install -q Django==$DJANGO
   - pip install coveralls coverage django-discover-runner
