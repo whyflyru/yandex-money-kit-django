@@ -18,10 +18,11 @@ class Goods(models.Model):
 
 
 class Order(models.Model):
-    goods = models.ForeignKey(Goods, verbose_name='Товар')
+    goods = models.ForeignKey(Goods, verbose_name='Товар', on_delete=models.CASCADE)
     count = models.PositiveIntegerField('Кол-во', default=1)
     payment = models.ForeignKey('yandex_money.Payment',
-                                verbose_name='Платеж')
+                                verbose_name='Платеж',
+                                on_delete=models.CASCADE)
     amount = models.PositiveIntegerField('Сумма заказа')
 
     class Meta:
