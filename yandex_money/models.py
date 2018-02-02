@@ -40,7 +40,7 @@ class Payment(models.Model):
         MA = 'MA'
         PB = 'PB'
         QW = 'QW'
-        QP = 'QP'
+        CR = 'CR'
 
         CHOICES = (
             (PC, 'Кошелек Яндекс.Деньги'),
@@ -53,7 +53,7 @@ class Payment(models.Model):
             (MA, 'MasterPass'),
             (PB, 'Интернет-банк Промсвязьбанка'),
             (QW, 'QIWI Wallet'),
-            (QP, 'Доверительный платеж (Куппи.ру)'),
+            (CR, 'Заплатить по частям'),
         )
 
     class CURRENCY:
