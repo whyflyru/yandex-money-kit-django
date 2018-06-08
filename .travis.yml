@@ -1,15 +1,14 @@
 language: python
 python:
   - "2.7"
-  - "3.4"
-  - "3.5"
+  - "3.6"
 env:
-  - DJANGO=1.8.13 DB=sqlite
-  - DJANGO=1.9.6 DB=sqlite
-  - DJANGO=1.10.7 DB=sqlite
+  - DJANGO=1.10.8 DB=sqlite
+  - DJANGO=1.11.14 DB=sqlite
+  - DJANGO=2.0.7 DB=sqlite
 install:
   - pip install -q Django==$DJANGO
-  - pip install coveralls coverage django-discover-runner
+  - pip install coveralls coverage django-discover-runner django-webtest webtest
 script:
   - coverage run --rcfile=.coveragerc setup.py test
 after_success:
