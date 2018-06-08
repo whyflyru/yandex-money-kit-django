@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import logging
-from datetime import datetime
 
 from django.http import HttpResponse
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
@@ -64,7 +64,7 @@ class BaseView(View):
             getattr(settings, 'YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
             params.get('code') != '0'
         ):
-            mail_admins('yandexmoney_django error', u'post data: {post_data}\n\nresponse:{response}'.format(
+            mail_admins('yandexmoney_django error', 'post data: {post_data}\n\nresponse:{response}'.format(
                 post_data=request.POST,
                 response=content,
             ))
@@ -84,7 +84,7 @@ class BaseView(View):
 
     def get_response_params(self, payment, cd):
         if payment:
-            now = datetime.now()
+            now = timezone.now()
 
             payment.performed_datetime = now
             payment.save()
@@ -122,7 +122,7 @@ class CheckOrderFormView(BaseView):
         if payment.order_amount != data['orderSumAmount']:
             params = {
                 'code': '100',
-                'message': u'Неверно указана сумма платежа',
+                'message': 'Неверно указана сумма платежа',
             }
             raise YandexValidationError(params=params)
 
@@ -142,7 +142,7 @@ class NoticeFormView(BaseView):
         payment.order_currency = cd.get('orderSumCurrencyPaycash')
         payment.shop_amount = cd.get('shopSumAmount')
         payment.shop_currency = cd.get('shopSumCurrencyPaycash')
-        payment.payer_code = cd.get('paymentPayerCode')
+        payment.payer_code = cd.get('paymentPayerCode', '')
         payment.payment_type = cd.get('paymentType')
         payment.status = payment.STATUS.SUCCESS
         payment.save()

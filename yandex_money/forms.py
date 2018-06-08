@@ -2,8 +2,10 @@
 from __future__ import unicode_literals
 from hashlib import md5
 
+import six
 from django import forms
 from django.conf import settings
+
 from .models import Payment
 
 
@@ -39,8 +41,8 @@ class BasePaymentForm(forms.Form):
         BAD_SHOP_ID = 1
 
     error_messages = {
-        ERROR_MESSAGE_CODES.BAD_SCID: u'scid не совпадает с YANDEX_MONEY_SCID',
-        ERROR_MESSAGE_CODES.BAD_SHOP_ID: u'scid не совпадает с YANDEX_MONEY_SHOP_ID'
+        ERROR_MESSAGE_CODES.BAD_SCID: 'scid не совпадает с YANDEX_MONEY_SCID',
+        ERROR_MESSAGE_CODES.BAD_SHOP_ID: 'scid не совпадает с YANDEX_MONEY_SHOP_ID'
     }
 
     class ACTION:
@@ -48,15 +50,15 @@ class BasePaymentForm(forms.Form):
         CPAYMENT = 'paymentAviso'
 
         CHOICES = (
-            (CHECK, u'Проверка заказа'),
-            (CPAYMENT, u'Уведомления о переводе'),
+            (CHECK, 'Проверка заказа'),
+            (CPAYMENT, 'Уведомления о переводе'),
         )
 
     shopId = forms.IntegerField(initial=settings.YANDEX_MONEY_SHOP_ID)
     scid = forms.IntegerField(initial=settings.YANDEX_MONEY_SCID)
     orderNumber = forms.CharField(min_length=1, max_length=64)
     customerNumber = forms.CharField(min_length=1, max_length=64)
-    paymentType = forms.CharField(label=u'Способ оплаты',
+    paymentType = forms.CharField(label='Способ оплаты',
                                   widget=forms.Select(choices=Payment.PAYMENT_TYPE.CHOICES),
                                   min_length=2, max_length=2,
                                   initial=Payment.PAYMENT_TYPE.PC)
@@ -78,7 +80,7 @@ class BasePaymentForm(forms.Form):
         """
         action;orderSumAmount;orderSumCurrencyPaycash;orderSumBankPaycash;shopId;invoiceId;customerNumber;shopPassword
         """
-        hash_string = ';'.join(map(str, (
+        return md5(';'.join(map(six.text_type, (
             cd['action'],
             cd['orderSumAmount'],
             cd['orderSumCurrencyPaycash'],
@@ -86,10 +88,8 @@ class BasePaymentForm(forms.Form):
             cd['shopId'],
             cd['invoiceId'],
             cd['customerNumber'],
-            settings.YANDEX_MONEY_SHOP_PASSWORD
-        )))
-        hash_string = hash_string.encode('utf-8')
-        return md5(hash_string).hexdigest().upper()
+            settings.YANDEX_MONEY_SHOP_PASSWORD,
+        ))).encode('utf-8')).hexdigest().upper()
 
     @classmethod
     def check_md5(cls, cd):
@@ -161,7 +161,7 @@ class CheckForm(BasePaymentForm):
     orderSumCurrencyPaycash = forms.IntegerField()
     shopSumAmount = forms.DecimalField(min_value=0, decimal_places=2)
     shopSumCurrencyPaycash = forms.IntegerField()
-    paymentPayerCode = forms.IntegerField(min_value=1)
+    paymentPayerCode = forms.IntegerField(min_value=1, required=False)
 
 
 class NoticeForm(BasePaymentForm):
@@ -170,6 +170,6 @@ class NoticeForm(BasePaymentForm):
     orderSumCurrencyPaycash = forms.IntegerField()
     shopSumAmount = forms.DecimalField(min_value=0, decimal_places=2)
     shopSumCurrencyPaycash = forms.IntegerField()
-    paymentPayerCode = forms.IntegerField(min_value=1)
+    paymentPayerCode = forms.IntegerField(min_value=1, required=False)
     cps_email = forms.EmailField(required=False)
     cps_phone = forms.CharField(max_length=15, required=False)
