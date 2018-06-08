@@ -20,9 +20,9 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    product = models.ForeignKey(Product, verbose_name='Товар')
+    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
     count = models.PositiveIntegerField('Кол-во', default=1)
-    payment = models.ForeignKey('yandex_money.Payment', verbose_name='Платеж')
+    payment = models.ForeignKey('yandex_money.Payment', verbose_name='Платеж', on_delete=models.CASCADE)
     amount = models.PositiveIntegerField('Сумма заказа')
 
     class Meta:

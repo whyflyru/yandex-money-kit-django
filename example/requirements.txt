@@ -1,6 +1,2 @@
-django>1.5
-South==0.8.4
+django>=1.10
 lxml==3.3.4
-webtest==2.0.15
-django-annoying
-django-webtest==1.7.7

@@ -35,7 +35,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=[
-        'Django>=1.8',
+        'Django>=1.10',
         'lxml>=3.3.4',
         'six'
     ],
@@ -43,8 +43,6 @@ setup(
     test_requires=[
         'coveralls',
         'coverage',
-        'django-discover-runner',
-        'django-webtest==1.7.7',
-        'webtest==2.0.15'
+        'django-discover-runner'
     ]
 )
