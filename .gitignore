@@ -22,3 +22,5 @@ build/*
 .virtualenv/*
 activate
 settings_local.py
+
+.eggs/
