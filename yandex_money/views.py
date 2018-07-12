@@ -137,6 +137,7 @@ class NoticeFormView(BaseView):
         return E.paymentAvisoResponse(**params)
 
     def mark_payment(self, payment, cd):
+        payment.invoice_id = cd.get('invoiceId', None)
         payment.cps_email = cd.get('cps_email', '')
         payment.cps_phone = cd.get('cps_phone', '')
         payment.order_currency = cd.get('orderSumCurrencyPaycash')
