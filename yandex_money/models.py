@@ -67,7 +67,7 @@ class Payment(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True,
-        verbose_name='Пользователь')
+        verbose_name='Пользователь', on_delete=models.CASCADE)
     pub_date = models.DateTimeField('Время создания', auto_now_add=True)
 
     # Required request fields
