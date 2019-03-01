@@ -1,18 +1,44 @@
 # -*- coding: utf-8 -*-
 
 import os
-from distutils.core import setup
-from setuptools import find_packages
+from setuptools import setup
+
+
+def get_packages(package):
+    """
+    Return root package and all sub-packages.
+    """
+    return [dirpath
+            for dirpath, dirnames, filenames in os.walk(package)
+            if os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+
+def get_package_data(package):
+    """
+    Return all files under the root package, that are not in a
+    package themselves.
+    """
+    walk = [(dirpath.replace(package + os.sep, '', 1), filenames)
+            for dirpath, dirnames, filenames in os.walk(package)
+            if not os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+    filepaths = []
+    for base, filenames in walk:
+        filepaths.extend([os.path.join(base, filename)
+                          for filename in filenames])
+    return {package: filepaths}
+
 
 __author__ = 'Yandex.Money'
-__version__ = '1.4.1wf'
+__version__ = '1.4.1+whyfly.2'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django_yandex_money',
     version=__version__,
-    packages=find_packages(),
+    packages=get_packages('yandex_money'),
+    package_data=get_package_data('yandex_money'),
     url='https://github.com/yandex-money/yandex-money-kit-django',
     license='MIT',
     author=__author__,

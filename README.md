@@ -1,4 +1,4 @@
-##yanexmoney-kit-django
+## yanexmoney-kit-django
 
 [![Build](https://api.travis-ci.org/whyflyru/yandex-money-kit-django.svg?branch=master)](https://travis-ci.org/whyflyru/yandex-money-kit-django?branch=master) [![Coverage Status](https://coveralls.io/repos/github/whyflyru/yandex-money-kit-django/badge.svg?branch=master)](https://coveralls.io/github/whyflyru/yandex-money-kit-django?branch=master)
 
@@ -17,7 +17,7 @@
 * Django версии 1.8 или выше
 * lxml версии 3.3.4
 
-###Установка модуля
+### Установка модуля
 * Установить пакет:
 ```
         pip install git+https://github.com/yandex-money/yandex-money-kit-django.git
@@ -63,7 +63,7 @@
 * successURL: `https://example.com/success-payment/`
 
 
-###Использование
+### Использование
 [Полный пример использования](<https://github.com/DrMartiner/django-yandex-money/tree/develop/example>)
 
 * Представление платежной формы:
@@ -169,7 +169,7 @@ $ python setup.py test
 Любое использование Вами программы означает полное и безоговорочное принятие Вами условий лицензионного договора, размещенного по адресу https://money.yandex.ru/doc.xml?id=527132 (далее – «Лицензионный договор»). 
 Если Вы не принимаете условия Лицензионного договора в полном объёме, Вы не имеете права использовать программу в каких-либо целях.
 
-###Нашли ошибку или у вас есть предложение по улучшению модуля?
+### Нашли ошибку или у вас есть предложение по улучшению модуля?
 Пишите нам cms@yamoney.ru
 При обращении необходимо:
 * Указать наименование CMS и компонента магазина, а также их версии
