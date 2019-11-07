@@ -30,7 +30,7 @@ def get_package_data(package):
 
 
 __author__ = 'Yandex.Money'
-__version__ = '1.4.1+whyfly.2'
+__version__ = '1.4.1+whyfly.3'
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
