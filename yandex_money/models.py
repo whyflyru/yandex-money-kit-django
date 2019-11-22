@@ -71,9 +71,9 @@ class Payment(models.Model):
 
     # Required request fields
     shop_id = models.PositiveIntegerField(
-        'ID магазина', default=settings.YANDEX_MONEY_SHOP_ID)
+        'ID магазина')
     scid = models.PositiveIntegerField(
-        'Номер витрины', default=settings.YANDEX_MONEY_SCID)
+        'Номер витрины')
     customer_number = models.CharField(
         'Идентификатор плательщика', max_length=64,
         default=get_default_as_uuid)
@@ -94,9 +94,9 @@ class Payment(models.Model):
     cps_phone = models.CharField(
         'Телефон плательщика', max_length=15, blank=True, null=True)
     success_url = models.URLField(
-        'URL успешной оплаты', default=settings.YANDEX_MONEY_SUCCESS_URL)
+        'URL успешной оплаты')
     fail_url = models.URLField(
-        'URL неуспешной оплаты', default=settings.YANDEX_MONEY_FAIL_URL)
+        'URL неуспешной оплаты')
 
     # Transaction info
     status = models.CharField(
