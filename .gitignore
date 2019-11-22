@@ -24,3 +24,4 @@ activate
 settings_local.py
 
 .eggs/
+test.db

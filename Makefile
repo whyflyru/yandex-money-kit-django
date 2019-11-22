@@ -1,3 +1,5 @@
+PRPM := pipenv run python tests/manage.py
+
 .PHONY: clean clean-test clean-pyc clean-build release help dist
 .DEFAULT_GOAL := help
 
@@ -54,9 +56,23 @@ clean-test: ## remove test and coverage artifacts
 clean-cache: ## remove pip cache
 	rm -rf .cache
 
+clean-venv: ## remove local venv
+	rm -rf `pipenv --venv`
+
+env-prepare: ## install environment
+	pipenv install --dev
+
 release: dist ## package and upload a release
 	twine upload dist/*
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist
 	ls -l dist
+
+.PHONY: check-migrations
+check-migrations: ## check that all migrations are created
+	$(PRPM) makemigrations --check --dry-run
+
+.PHONY: check
+check: ## check
+	$(PRPM) check
